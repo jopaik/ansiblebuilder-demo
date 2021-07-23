@@ -1,0 +1,31 @@
+# Mac OS X
+*.DS_Store
+
+# Editors
+*.sw[poj]
+*~
+/.idea
+
+/test/integration/artifacts
+/demo/artifacts
+/demo/daemon.log
+/docs/_build
+/.tox
+/dist
+/build
+/rpm-build
+/deb-build
+/*.egg-info
+*.py[c,o]
+.pytest_cache
+pytestdebug.log
+test/integration/containerized/priv_data/artifacts/
+.coverage
+*,cover
+.venv
+/venv
+.env
+/test/data/debug/
+/test/data/printenv/env/
+/test/data/**/artifacts/
+/.eggs/

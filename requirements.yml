@@ -1,0 +1,7 @@
+---
+collections:
+  - servicenow.servicenow
+  - ansible.network
+  - cisco.dcnm
+  - arista.cvp
+  - cisco.aci

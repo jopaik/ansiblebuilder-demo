@@ -1,0 +1,3 @@
+requests  # from collection servicenow.servicenow,user
+pysnow  # from collection servicenow.servicenow,user
+netaddr  # from collection servicenow.servicenow,user
