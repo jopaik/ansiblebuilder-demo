@@ -1,3 +1,7 @@
-requests  # from collection servicenow.servicenow,user
-pysnow  # from collection servicenow.servicenow,user
-netaddr  # from collection servicenow.servicenow,user
+netaddr>=0.7.19  # from collection arista.cvp
+Jinja2>=2.10.3  # from collection arista.cvp
+paramiko>=2.7.1  # from collection arista.cvp
+requests==2.22.0  # from collection arista.cvp,user
+cvprac>=1.0.7  # from collection arista.cvp,user
+jsonschema>=3.2.0  # from collection arista.cvp,user
+treelib==1.5.5  # from collection arista.cvp,user

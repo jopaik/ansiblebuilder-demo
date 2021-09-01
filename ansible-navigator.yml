@@ -41,7 +41,7 @@ ansible-navigator:
         KEY1: VALUE1
         KEY2: VALUE2
         KEY3: VALUE3
-    image: jp_snow_ee
+    image: jp-cvp
     pull-policy: never
 #     volume-mounts:
 #     - src: "/test1"
