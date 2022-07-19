@@ -1,7 +1,6 @@
 ---
 - name: Get Ansible Version
   hosts: all
-  connection: local
   gather_facts: no
 
   tasks:
