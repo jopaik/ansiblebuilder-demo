@@ -30,7 +30,7 @@ ansible-navigator:
 #       type: become
 #
   execution-environment:
-    container-engine: docker
+    container-engine: podman
     enabled: True
     environment-variables:
       pass:
@@ -41,7 +41,7 @@ ansible-navigator:
         KEY1: VALUE1
         KEY2: VALUE2
         KEY3: VALUE3
-    image: registry.redhat.io/ansible-automation-platform-20-early-access/ee-supported-rhel8
+    image: registry.redhat.io/ansible-automation-platform-20-early-access/ansible-automation-platform-20-ee-29-rhel8
     pull-policy: never
 #     volume-mounts:
 #     - src: "/test1"

@@ -1,5 +1,5 @@
-ARG EE_BASE_IMAGE=quay.io/aap/ansible-automation-platform-20-ee-29-rhel8
-ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-20-early-access/ansible-builder-rhel8
+ARG EE_BASE_IMAGE=registry.redhat.io/ansible-automation-platform-22/ee-minimal-rhel8
+ARG EE_BUILDER_IMAGE=registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8
 
 FROM $EE_BASE_IMAGE as galaxy
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=
@@ -8,8 +8,8 @@ USER root
 ADD _build /build
 WORKDIR /build
 
-RUN ansible-galaxy role install -r requirements.yml --roles-path /usr/share/ansible/roles
-RUN ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path /usr/share/ansible/collections
+RUN ansible-galaxy role install -r requirements.yml --roles-path "/usr/share/ansible/roles"
+RUN ANSIBLE_GALAXY_DISABLE_GPG_VERIFY=1 ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path "/usr/share/ansible/collections"
 
 FROM $EE_BUILDER_IMAGE as builder
 
