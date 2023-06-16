@@ -1,0 +1,1065 @@
+[root@aap22c1 ansiblebuilder-demo]# ansible-builder build --tag=py311v3-2 -v 3
+Ansible Builder is generating your execution environment build context.
+File context/_build/requirements.yml is already up-to-date.
+File context/_build/requirements.txt is already up-to-date.
+File context/_build/bindep.txt is already up-to-date.
+File context/_build/scripts/assemble is already up-to-date.
+File context/_build/scripts/install-from-bindep is already up-to-date.
+File context/_build/scripts/introspect.py is already up-to-date.
+File context/_build/scripts/check_galaxy is already up-to-date.
+File context/_build/scripts/check_ansible is already up-to-date.
+File context/_build/scripts/entrypoint is already up-to-date.
+Ansible Builder is building your execution environment image. Tags: py311v3-2
+Running command:
+  podman build -f context/Containerfile -t py311v3-2 context
+[1/4] STEP 1/15: FROM registry.access.redhat.com/ubi8/ubi:latest AS base
+[1/4] STEP 2/15: USER root
+--> Using cache 953ff9417dc621caf96152d14b9cdeb39ad149f6a14c06e14bbcd01af891c40d
+--> 953ff9417dc
+[1/4] STEP 3/15: ARG EE_BASE_IMAGE
+--> Using cache fd0fd74e09d7c487dd2236f9fa10898f8a4a0ed20a67237c65e5094665c68aec
+--> fd0fd74e09d
+[1/4] STEP 4/15: ARG PYCMD
+--> Using cache 4af26365f3dbf4a0d9e2f234cee9dfc60f97f81565524abcf4e473c3f57afe01
+--> 4af26365f3d
+[1/4] STEP 5/15: ARG PYPKG
+--> Using cache 7f4fbfb0825b5c814608f85ba80ea478e833d3bc05be4290f533aefce2398317
+--> 7f4fbfb0825
+[1/4] STEP 6/15: ARG PKGMGR_PRESERVE_CACHE
+--> Using cache 51e182753a7956db3eaa8470c515558c4a3fb731d0db569345c4df6aebe51f23
+--> 51e182753a7
+[1/4] STEP 7/15: ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+--> Using cache cdf3037101c79e1f36324f0926f78ac8c4dcf5625d050fe2a66be0105d643e0c
+--> cdf3037101c
+[1/4] STEP 8/15: ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+--> Using cache 9e1a044228ccd683cbdb47d0eff67969b3130a7bab75e8a95dec7fb6ae9799fc
+--> 9e1a044228c
+[1/4] STEP 9/15: ARG ANSIBLE_INSTALL_REFS
+--> Using cache dac8e0b14e432d8f4924e397f0ee9954686e79ca62232d3e9317799c462c92f0
+--> dac8e0b14e4
+[1/4] STEP 10/15: ARG PKGMGR
+--> Using cache 0575c4b55b69b53cb9ddc227fbb4e598bddd1fca47e5106e7c6170a84e2adc5f
+--> 0575c4b55b6
+[1/4] STEP 11/15: RUN $PKGMGR install $PYPKG -y ; if [ -z $PKGMGR_PRESERVE_CACHE ]; then $PKGMGR clean all; fi
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+Red Hat Enterprise Linux 8 for x86_64 - AppStre  12 MB/s |  57 MB     00:04    
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS  8.9 MB/s |  61 MB     00:06    
+Red Hat Universal Base Image 8 (RPMs) - BaseOS  1.9 MB/s | 839 kB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - AppStre 7.6 MB/s | 3.3 MB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - CodeRea 419 kB/s | 106 kB     00:00    
+Last metadata expiration check: 0:00:02 ago on Fri Jun 16 18:44:23 2023.
+Dependencies resolved.
+===============================================================================================
+ Package                       Arch    Version          Repository                         Size
+===============================================================================================
+Installing:
+ python3.11                    x86_64  3.11.2-2.el8_8.1 rhel-8-for-x86_64-appstream-rpms   30 k
+Installing dependencies:
+ mpdecimal                     x86_64  2.5.1-3.el8      rhel-8-for-x86_64-appstream-rpms   93 k
+ python3.11-libs               x86_64  3.11.2-2.el8_8.1 rhel-8-for-x86_64-appstream-rpms   10 M
+ python3.11-pip-wheel          noarch  22.3.1-2.el8     rhel-8-for-x86_64-appstream-rpms  1.4 M
+ python3.11-setuptools-wheel   noarch  65.5.1-2.el8     rhel-8-for-x86_64-appstream-rpms  720 k
+
+Transaction Summary
+===============================================================================================
+Install  5 Packages
+
+Total download size: 13 M
+Installed size: 47 M
+Downloading Packages:
+(1/5): mpdecimal-2.5.1-3.el8.x86_64.rpm         220 kB/s |  93 kB     00:00    
+(2/5): python3.11-3.11.2-2.el8_8.1.x86_64.rpm   259 kB/s |  30 kB     00:00    
+(3/5): python3.11-setuptools-wheel-65.5.1-2.el8 1.2 MB/s | 720 kB     00:00    
+(4/5): python3.11-pip-wheel-22.3.1-2.el8.noarch 1.8 MB/s | 1.4 MB     00:00    
+(5/5): python3.11-libs-3.11.2-2.el8_8.1.x86_64. 3.9 MB/s |  10 MB     00:02    
+--------------------------------------------------------------------------------
+Total                                           3.9 MB/s |  13 MB     00:03     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : python3.11-pip-wheel-22.3.1-2.el8.noarch               1/5 
+  Installing       : mpdecimal-2.5.1-3.el8.x86_64                           2/5 
+  Installing       : python3.11-setuptools-wheel-65.5.1-2.el8.noarch        3/5 
+  Installing       : python3.11-3.11.2-2.el8_8.1.x86_64                     4/5 
+  Running scriptlet: python3.11-3.11.2-2.el8_8.1.x86_64                     4/5 
+  Installing       : python3.11-libs-3.11.2-2.el8_8.1.x86_64                5/5 
+  Running scriptlet: python3.11-libs-3.11.2-2.el8_8.1.x86_64                5/5 
+  Verifying        : python3.11-setuptools-wheel-65.5.1-2.el8.noarch        1/5 
+  Verifying        : mpdecimal-2.5.1-3.el8.x86_64                           2/5 
+  Verifying        : python3.11-pip-wheel-22.3.1-2.el8.noarch               3/5 
+  Verifying        : python3.11-3.11.2-2.el8_8.1.x86_64                     4/5 
+  Verifying        : python3.11-libs-3.11.2-2.el8_8.1.x86_64                5/5 
+Installed products updated.
+
+Installed:
+  mpdecimal-2.5.1-3.el8.x86_64                                                  
+  python3.11-3.11.2-2.el8_8.1.x86_64                                            
+  python3.11-libs-3.11.2-2.el8_8.1.x86_64                                       
+  python3.11-pip-wheel-22.3.1-2.el8.noarch                                      
+  python3.11-setuptools-wheel-65.5.1-2.el8.noarch                               
+
+Complete!
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+42 files removed
+--> e2ec9d8427f
+[1/4] STEP 12/15: RUN $PYCMD -m ensurepip
+Looking in links: /tmp/tmp6yrmy1ps
+Processing /tmp/tmp6yrmy1ps/setuptools-65.5.1-py3-none-any.whl
+Processing /tmp/tmp6yrmy1ps/pip-22.3.1-py3-none-any.whl
+Installing collected packages: setuptools, pip
+Successfully installed pip-22.3.1 setuptools-65.5.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+--> 234838853e6
+[1/4] STEP 13/15: RUN $PYCMD -m pip install --no-cache-dir $ANSIBLE_INSTALL_REFS
+Collecting https://github.com/ansible/ansible/archive/refs/tags/v2.14.6.tar.gz
+  Downloading https://github.com/ansible/ansible/archive/refs/tags/v2.14.6.tar.gz
+     | 11.4 MB 8.0 MB/s 0:00:01
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting ansible-runner==2.3.3
+  Downloading ansible_runner-2.3.3-py3-none-any.whl (81 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 81.0/81.0 kB 8.3 MB/s eta 0:00:00
+Collecting pexpect>=4.5
+  Downloading pexpect-4.8.0-py2.py3-none-any.whl (59 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.0/59.0 kB 119.3 MB/s eta 0:00:00
+Collecting packaging
+  Downloading packaging-23.1-py3-none-any.whl (48 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.9/48.9 kB 109.5 MB/s eta 0:00:00
+Collecting python-daemon
+  Downloading python_daemon-3.0.1-py3-none-any.whl (31 kB)
+Collecting pyyaml
+  Downloading PyYAML-6.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (757 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 757.9/757.9 kB 35.2 MB/s eta 0:00:00
+Collecting six
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting jinja2>=3.0.0
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 102.2 MB/s eta 0:00:00
+Collecting cryptography
+  Downloading cryptography-41.0.1-cp37-abi3-manylinux_2_28_x86_64.whl (4.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 49.9 MB/s eta 0:00:00
+Collecting resolvelib<0.9.0,>=0.5.3
+  Downloading resolvelib-0.8.1-py2.py3-none-any.whl (16 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.1.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (28 kB)
+Collecting ptyprocess>=0.5
+  Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Collecting cffi>=1.12
+  Downloading cffi-1.15.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (462 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 462.6/462.6 kB 110.2 MB/s eta 0:00:00
+Collecting docutils
+  Downloading docutils-0.20.1-py3-none-any.whl (572 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 572.7/572.7 kB 73.7 MB/s eta 0:00:00
+Collecting lockfile>=0.10
+  Downloading lockfile-0.12.2-py2.py3-none-any.whl (13 kB)
+Requirement already satisfied: setuptools>=62.4.0 in /usr/local/lib/python3.11/site-packages (from python-daemon->ansible-runner==2.3.3) (65.5.1)
+Collecting pycparser
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 118.7/118.7 kB 54.7 MB/s eta 0:00:00
+Building wheels for collected packages: ansible-core
+  Building wheel for ansible-core (pyproject.toml): started
+  Building wheel for ansible-core (pyproject.toml): finished with status 'done'
+  Created wheel for ansible-core: filename=ansible_core-2.14.6-py3-none-any.whl size=2212681 sha256=8b2a7da6ea894e12ae361aae68b4042cb81cf86495e8937e8e90b6f2085201ec
+  Stored in directory: /tmp/pip-ephem-wheel-cache-kq31t71h/wheels/15/2c/60/766fbb070ee063a32a8b1d97a2c27aec53fc6ccaeef446fec0
+Successfully built ansible-core
+Installing collected packages: resolvelib, ptyprocess, lockfile, six, pyyaml, pycparser, pexpect, packaging, MarkupSafe, docutils, python-daemon, jinja2, cffi, cryptography, ansible-runner, ansible-core
+Successfully installed MarkupSafe-2.1.3 ansible-core-2.14.6 ansible-runner-2.3.3 cffi-1.15.1 cryptography-41.0.1 docutils-0.20.1 jinja2-3.1.2 lockfile-0.12.2 packaging-23.1 pexpect-4.8.0 ptyprocess-0.7.0 pycparser-2.21 python-daemon-3.0.1 pyyaml-6.0 resolvelib-0.8.1 six-1.16.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.1.2
+[notice] To update, run: python3.11 -m pip install --upgrade pip
+--> c8e07b5317d
+[1/4] STEP 14/15: COPY _build/scripts/ /output/scripts/
+--> a77706e95a0
+[1/4] STEP 15/15: COPY _build/scripts/entrypoint /opt/builder/bin/entrypoint
+--> fed27a70e07
+[4/4] STEP 1/22: FROM fed27a70e07136c08d1f8acae351b7100d5427e48579b20e3df5c8b3f4f6f955 AS final
+[4/4] STEP 2/22: ARG EE_BASE_IMAGE
+--> f9d4d2ad41f
+[4/4] STEP 3/22: ARG PYCMD
+--> 08241f1cb0e
+[4/4] STEP 4/22: ARG PYPKG
+--> 0fbcb3897c0
+[4/4] STEP 5/22: ARG PKGMGR_PRESERVE_CACHE
+--> 937defdc583
+[4/4] STEP 6/22: ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+--> 3586d67646b
+[4/4] STEP 7/22: ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+--> 7cdc3a49a63
+[4/4] STEP 8/22: ARG ANSIBLE_INSTALL_REFS
+--> 28be0db06cf
+[4/4] STEP 9/22: ARG PKGMGR
+--> 7e0aaf8752c
+[4/4] STEP 10/22: RUN /output/scripts/check_ansible $PYCMD
++ PYCMD=/usr/bin/python3.11
++ '[' -z /usr/bin/python3.11 ']'
++ '[' '!' -x /usr/bin/python3.11 ']'
++ ansible --version
+ansible [core 2.14.6]
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.11/site-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.11.2 (main, Jun  6 2023, 07:39:01) [GCC 8.5.0 20210514 (Red Hat 8.5.0-18)] (/usr/bin/python3.11)
+  jinja version = 3.1.2
+  libyaml = True
++ '[' 0 -ne 0 ']'
++ ansible-runner --version
+2.3.3
++ '[' 0 -ne 0 ']'
++ /usr/bin/python3.11 -c 'import ansible ; import ansible_runner'
++ '[' 0 -ne 0 ']'
++ exit 0
+--> 00cedf9db4c
+[4/4] STEP 11/22: COPY --from=galaxy /usr/share/ansible /usr/share/ansible
+[2/4] STEP 1/14: FROM fed27a70e07136c08d1f8acae351b7100d5427e48579b20e3df5c8b3f4f6f955 AS galaxy
+[2/4] STEP 2/14: ARG EE_BASE_IMAGE
+--> Using cache f9d4d2ad41fa600204d24779853644150a767e953674eb357a7f9ee938e749cf
+--> f9d4d2ad41f
+[2/4] STEP 3/14: ARG PYCMD
+--> Using cache 08241f1cb0e98c532e5d5b7b5b84f19cd0ed72090084d1f1150fe8a099b4ea48
+--> 08241f1cb0e
+[2/4] STEP 4/14: ARG PYPKG
+--> Using cache 0fbcb3897c072501d54b22106eee2c4c98850fe0daf78d113e0d9d7c7e880e9c
+--> 0fbcb3897c0
+[2/4] STEP 5/14: ARG PKGMGR_PRESERVE_CACHE
+--> Using cache 937defdc583e64a11684764045bb6c877fbcc2a83eadc8212308bea29db39248
+--> 937defdc583
+[2/4] STEP 6/14: ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+--> Using cache 3586d67646b803b2175c2f8252c837c04a12276fce1c2947976887e1dead7118
+--> 3586d67646b
+[2/4] STEP 7/14: ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+--> Using cache 7cdc3a49a63091574ea3cda24328cc3ef2ab9ef0f96fd8963f0f32337b44d3fd
+--> 7cdc3a49a63
+[2/4] STEP 8/14: ARG ANSIBLE_INSTALL_REFS
+--> Using cache 28be0db06cf3d54aacee409c3555ff2dc3a60c5f52f82dc2b26f5222843a0630
+--> 28be0db06cf
+[2/4] STEP 9/14: ARG PKGMGR
+--> Using cache 7e0aaf8752c94d41dbe01c8dcdd7f5836cfbd29514b21e4aa135e28f1c40384d
+--> 7e0aaf8752c
+[2/4] STEP 10/14: RUN /output/scripts/check_galaxy
++ ansible-galaxy --version
+ansible-galaxy [core 2.14.6]
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.11/site-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible-galaxy
+  python version = 3.11.2 (main, Jun  6 2023, 07:39:01) [GCC 8.5.0 20210514 (Red Hat 8.5.0-18)] (/usr/bin/python3.11)
+  jinja version = 3.1.2
+  libyaml = True
++ '[' 0 -ne 0 ']'
++ exit 0
+--> 20f2d62926d
+[2/4] STEP 11/14: COPY _build /build
+--> f606b2b753d
+[2/4] STEP 12/14: WORKDIR /build
+--> 8e2c384c6de
+[2/4] STEP 13/14: RUN ansible-galaxy role install $ANSIBLE_GALAXY_CLI_ROLE_OPTS -r requirements.yml --roles-path "/usr/share/ansible/roles"
+Skipping install, no requirements found
+--> 2a9e6da9ab2
+[2/4] STEP 14/14: RUN ANSIBLE_GALAXY_DISABLE_GPG_VERIFY=1 ansible-galaxy collection install $ANSIBLE_GALAXY_CLI_COLLECTION_OPTS -r requirements.yml --collections-path "/usr/share/ansible/collections"
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/download/ansible-utils-2.10.3.tar.gz to /root/.ansible/tmp/ansible-local-1u9kzcxwe/tmp2j4pesnw/ansible-utils-2.10.3-bewz648c
+Installing 'ansible.utils:2.10.3' to '/usr/share/ansible/collections/ansible_collections/ansible/utils'
+ansible.utils:2.10.3 was installed successfully
+Downloading https://galaxy.ansible.com/download/ansible-netcommon-5.1.1.tar.gz to /root/.ansible/tmp/ansible-local-1u9kzcxwe/tmp2j4pesnw/ansible-netcommon-5.1.1-o8flklge
+Installing 'ansible.netcommon:5.1.1' to '/usr/share/ansible/collections/ansible_collections/ansible/netcommon'
+ansible.netcommon:5.1.1 was installed successfully
+Downloading https://galaxy.ansible.com/download/cisco-nxos-4.4.0.tar.gz to /root/.ansible/tmp/ansible-local-1u9kzcxwe/tmp2j4pesnw/cisco-nxos-4.4.0-ca4oa4td
+Installing 'cisco.nxos:4.4.0' to '/usr/share/ansible/collections/ansible_collections/cisco/nxos'
+cisco.nxos:4.4.0 was installed successfully
+Downloading https://galaxy.ansible.com/download/cisco-ios-4.6.1.tar.gz to /root/.ansible/tmp/ansible-local-1u9kzcxwe/tmp2j4pesnw/cisco-ios-4.6.1-nu2o6181
+Installing 'cisco.ios:4.6.1' to '/usr/share/ansible/collections/ansible_collections/cisco/ios'
+cisco.ios:4.6.1 was installed successfully
+--> e31bf1b4ace
+[3/4] STEP 1/16: FROM fed27a70e07136c08d1f8acae351b7100d5427e48579b20e3df5c8b3f4f6f955 AS builder
+[3/4] STEP 2/16: WORKDIR /build
+--> 8322ef88e60
+[3/4] STEP 3/16: ARG EE_BASE_IMAGE
+--> 25e30ffdb01
+[3/4] STEP 4/16: ARG PYCMD
+--> 83e534042bd
+[3/4] STEP 5/16: ARG PYPKG
+--> cb59a0c3573
+[3/4] STEP 6/16: ARG PKGMGR_PRESERVE_CACHE
+--> 788eabd4c49
+[3/4] STEP 7/16: ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
+--> 51c96639ba4
+[3/4] STEP 8/16: ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
+--> 1b64b3a0aef
+[3/4] STEP 9/16: ARG ANSIBLE_INSTALL_REFS
+--> 048c4d5e822
+[3/4] STEP 10/16: ARG PKGMGR
+--> fd8922a2d5a
+[3/4] STEP 11/16: RUN $PYCMD -m pip install --no-cache-dir bindep pyyaml requirements-parser
+Collecting bindep
+  Downloading bindep-2.11.0-py2.py3-none-any.whl (34 kB)
+Requirement already satisfied: pyyaml in /usr/local/lib64/python3.11/site-packages (6.0)
+Collecting requirements-parser
+  Downloading requirements_parser-0.5.0-py3-none-any.whl (18 kB)
+Collecting Parsley
+  Downloading Parsley-1.3-py2.py3-none-any.whl (88 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.9/88.9 kB 19.5 MB/s eta 0:00:00
+Collecting pbr>=2.0.0
+  Downloading pbr-5.11.1-py2.py3-none-any.whl (112 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 112.7/112.7 kB 154.3 MB/s eta 0:00:00
+Collecting distro>=1.7.0
+  Downloading distro-1.8.0-py3-none-any.whl (20 kB)
+Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from bindep) (23.1)
+Collecting types-setuptools>=57.0.0
+  Downloading types_setuptools-67.8.0.0-py3-none-any.whl (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.6/44.6 kB 80.2 MB/s eta 0:00:00
+Installing collected packages: types-setuptools, Parsley, requirements-parser, pbr, distro, bindep
+Successfully installed Parsley-1.3 bindep-2.11.0 distro-1.8.0 pbr-5.11.1 requirements-parser-0.5.0 types-setuptools-67.8.0.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.1.2
+[notice] To update, run: python3.11 -m pip install --upgrade pip
+--> 0c750b61a33
+[3/4] STEP 12/16: COPY --from=galaxy /usr/share/ansible /usr/share/ansible
+--> 2a9ad9ba5dc
+[3/4] STEP 13/16: COPY _build/requirements.txt requirements.txt
+--> fb8fff5c3a0
+[3/4] STEP 14/16: COPY _build/bindep.txt bindep.txt
+--> bd458ef3c09
+[3/4] STEP 15/16: RUN $PYCMD /output/scripts/introspect.py introspect --sanitize --user-pip=requirements.txt --user-bindep=bindep.txt --write-bindep=/tmp/src/bindep.txt --write-pip=/tmp/src/requirements.txt
+Creating parent directory for /tmp/src/requirements.txt
+---
+python:
+- 'ansible_pylibssh>=0.2.0  # from collection ansible.netcommon,cisco.ios'
+- 'jxmlease  # from collection ansible.netcommon'
+- 'ncclient  # from collection ansible.netcommon'
+- 'netaddr  # from collection ansible.netcommon,ansible.utils'
+- 'paramiko==2.8.1  # from collection ansible.netcommon,cisco.ios,cisco.nxos'
+- 'xmltodict  # from collection ansible.netcommon,ansible.utils'
+- 'grpcio  # from collection ansible.netcommon'
+- 'protobuf  # from collection ansible.netcommon'
+- 'jsonschema  # from collection ansible.utils'
+- 'textfsm  # from collection ansible.utils'
+- 'ttp  # from collection ansible.utils'
+- 'scp  # from collection cisco.nxos'
+- 'address  # from collection user'
+system:
+- 'gcc-c++ [doc test platform:rpm]  # from collection ansible.netcommon, ansible.utils,
+  cisco.ios, cisco.nxos'
+- 'libyaml-devel [test platform:rpm]  # from collection ansible.netcommon'
+- 'libyaml-dev [test platform:dpkg]  # from collection ansible.netcommon'
+- 'python3-devel [test platform:rpm]  # from collection ansible.netcommon, ansible.utils,
+  cisco.ios, cisco.nxos'
+- 'python3 [test platform:rpm]  # from collection ansible.netcommon, ansible.utils,
+  cisco.ios, cisco.nxos'
+- 'gcc [compile platform:rpm]  # from collection ansible.netcommon'
+- 'libssh-dev [compile platform:dpkg]  # from collection ansible.netcommon'
+- 'libssh-devel [compile platform:rpm]  # from collection ansible.netcommon'
+- 'python3-Cython [compile platform:fedora-35 platform:rhel-9]  # from collection
+  ansible.netcommon'
+- 'python3-six [platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-six [platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'python3-lxml [platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-lxml [platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'findutils [compile platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'gcc [compile platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'make [compile platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'python3-devel [compile platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-devel [compile platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'python3-cffi [platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-cffi [platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'python3-cryptography [platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-cryptography [platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'python3-pycparser [platform:centos-9 platform:rhel-9]  # from collection ansible.netcommon'
+- 'python39-pycparser [platform:centos-8 platform:rhel-8]  # from collection ansible.netcommon'
+- 'libssh-devel [build platform:rpm]  # from collection cisco.ios'
+- 'libssh-dev [build platform:dpkg]  # from collection cisco.ios'
+- 'iputils [platform:rpm]  # from collection user'
+
+--> 49a8ba492e5
+[3/4] STEP 16/16: RUN /output/scripts/assemble
+++ source /etc/os-release
++++ NAME='Red Hat Enterprise Linux'
++++ VERSION='8.8 (Ootpa)'
++++ ID=rhel
++++ ID_LIKE=fedora
++++ VERSION_ID=8.8
++++ PLATFORM_ID=platform:el8
++++ PRETTY_NAME='Red Hat Enterprise Linux 8.8 (Ootpa)'
++++ ANSI_COLOR='0;31'
++++ CPE_NAME=cpe:/o:redhat:enterprise_linux:8::baseos
++++ HOME_URL=https://www.redhat.com/
++++ DOCUMENTATION_URL=https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8
++++ BUG_REPORT_URL=https://bugzilla.redhat.com/
++++ REDHAT_BUGZILLA_PRODUCT='Red Hat Enterprise Linux 8'
++++ REDHAT_BUGZILLA_PRODUCT_VERSION=8.8
++++ REDHAT_SUPPORT_PRODUCT='Red Hat Enterprise Linux'
++++ REDHAT_SUPPORT_PRODUCT_VERSION=8.8
+++ echo rhel
++ RELEASE=rhel
++ PKGMGR=/usr/bin/dnf
++ PKGMGR_OPTS=
++ PKGMGR_PRESERVE_CACHE=
++ PYCMD=/usr/bin/python3.11
++ PIPCMD='/usr/bin/python3.11 -m pip'
++ /usr/bin/python3.11 -m ensurepip
+Looking in links: /tmp/tmp60u0ovum
+Requirement already satisfied: setuptools in /usr/local/lib/python3.11/site-packages (65.5.1)
+Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (22.3.1)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
++ '[' -z /usr/bin/dnf ']'
++ '[' /usr/bin/dnf = /usr/bin/microdnf ']'
++ mkdir -p /output/bindep
++ mkdir -p /output/wheels
++ mkdir -p /tmp/src
++ cd /tmp/src
++ PACKAGES=
++ PIP_OPTS=
++ install_bindep
++ '[' -f bindep.txt ']'
++ sort
++ bindep -l newline
++ '[' rhel == centos ']'
+++ bindep -b compile
+++ true
++ compile_packages='gcc
+iputils
+libssh-devel
+make
+python39-cffi
+python39-cryptography
+python39-devel
+python39-lxml
+python39-pycparser
+python39-six'
++ '[' '!' -z 'gcc
+iputils
+libssh-devel
+make
+python39-cffi
+python39-cryptography
+python39-devel
+python39-lxml
+python39-pycparser
+python39-six' ']'
++ /usr/bin/dnf install -y gcc iputils libssh-devel make python39-cffi python39-cryptography python39-devel python39-lxml python39-pycparser python39-six
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+Red Hat Enterprise Linux 8 for x86_64 - AppStre 9.6 MB/s |  57 MB     00:05    
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS   22 MB/s |  61 MB     00:02    
+Red Hat Universal Base Image 8 (RPMs) - BaseOS  4.1 MB/s | 839 kB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - AppStre  14 MB/s | 3.3 MB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - CodeRea 631 kB/s | 106 kB     00:00    
+Last metadata expiration check: 0:00:01 ago on Fri Jun 16 18:52:06 2023.
+Dependencies resolved.
+===================================================================================================================
+ Package                     Arch    Version                                Repository                         Size
+===================================================================================================================
+Installing:
+ gcc                         x86_64  8.5.0-18.el8                           rhel-8-for-x86_64-appstream-rpms   23 M
+ iputils                     x86_64  20180629-10.el8                        rhel-8-for-x86_64-baseos-rpms     148 k
+ libssh-devel                x86_64  0.9.6-6.el8                            rhel-8-for-x86_64-appstream-rpms  439 k
+ make                        x86_64  1:4.2.1-11.el8                         rhel-8-for-x86_64-baseos-rpms     498 k
+ python39-cffi               x86_64  1.14.3-2.module+el8.4.0+9822+20bf1249  rhel-8-for-x86_64-appstream-rpms  250 k
+ python39-cryptography       x86_64  3.3.1-2.module+el8.4.0+9822+20bf1249   rhel-8-for-x86_64-appstream-rpms  556 k
+ python39-devel              x86_64  3.9.16-1.module+el8.8.0+17625+b531f198 rhel-8-for-x86_64-appstream-rpms  233 k
+ python39-lxml               x86_64  4.6.5-1.module+el8.6.0+13933+9cf0c87c  rhel-8-for-x86_64-appstream-rpms  1.3 M
+ python39-pycparser          noarch  2.20-3.module+el8.4.0+9822+20bf1249    rhel-8-for-x86_64-appstream-rpms  131 k
+ python39-six                noarch  1.15.0-3.module+el8.4.0+9822+20bf1249  rhel-8-for-x86_64-appstream-rpms   41 k
+Installing dependencies:
+ binutils                    x86_64  2.30-119.el8                           rhel-8-for-x86_64-baseos-rpms     5.8 M
+ cmake-filesystem            x86_64  3.20.2-5.el8                           rhel-8-for-x86_64-appstream-rpms   45 k
+ cpp                         x86_64  8.5.0-18.el8                           rhel-8-for-x86_64-appstream-rpms   10 M
+ glibc-devel                 x86_64  2.28-225.el8                           rhel-8-for-x86_64-baseos-rpms      83 k
+ glibc-headers               x86_64  2.28-225.el8                           rhel-8-for-x86_64-baseos-rpms     488 k
+ isl                         x86_64  0.16.1-6.el8                           rhel-8-for-x86_64-appstream-rpms  841 k
+ kernel-headers              x86_64  4.18.0-477.13.1.el8_8                  rhel-8-for-x86_64-baseos-rpms      11 M
+ libgomp                     x86_64  8.5.0-18.el8                           rhel-8-for-x86_64-baseos-rpms     208 k
+ libmpc                      x86_64  1.1.0-9.1.el8                          rhel-8-for-x86_64-appstream-rpms   61 k
+ libpkgconf                  x86_64  1.4.2-1.el8                            rhel-8-for-x86_64-baseos-rpms      35 k
+ libxcrypt-devel             x86_64  4.1.1-6.el8                            rhel-8-for-x86_64-baseos-rpms      25 k
+ libxslt                     x86_64  1.1.32-6.el8                           rhel-8-for-x86_64-baseos-rpms     250 k
+ pkgconf                     x86_64  1.4.2-1.el8                            rhel-8-for-x86_64-baseos-rpms      38 k
+ pkgconf-m4                  noarch  1.4.2-1.el8                            rhel-8-for-x86_64-baseos-rpms      17 k
+ pkgconf-pkg-config          x86_64  1.4.2-1.el8                            rhel-8-for-x86_64-baseos-rpms      15 k
+ python39                    x86_64  3.9.16-1.module+el8.8.0+17625+b531f198 rhel-8-for-x86_64-appstream-rpms   33 k
+ python39-idna               noarch  2.10-3.module+el8.4.0+9822+20bf1249    rhel-8-for-x86_64-appstream-rpms   88 k
+ python39-libs               x86_64  3.9.16-1.module+el8.8.0+17625+b531f198 rhel-8-for-x86_64-appstream-rpms  8.2 M
+ python39-pip-wheel          noarch  20.2.4-7.module+el8.6.0+13003+6bb2c488 rhel-8-for-x86_64-appstream-rpms  1.1 M
+ python39-ply                noarch  3.11-10.module+el8.4.0+9822+20bf1249   rhel-8-for-x86_64-appstream-rpms  111 k
+ python39-setuptools-wheel   noarch  50.3.2-4.module+el8.5.0+12204+54860423 rhel-8-for-x86_64-appstream-rpms  497 k
+Installing weak dependencies:
+ python39-pip                noarch  20.2.4-7.module+el8.6.0+13003+6bb2c488 rhel-8-for-x86_64-appstream-rpms  1.9 M
+ python39-setuptools         noarch  50.3.2-4.module+el8.5.0+12204+54860423 rhel-8-for-x86_64-appstream-rpms  871 k
+Enabling module streams:
+ python39                            3.9                                                                           
+
+Transaction Summary
+===================================================================================================================
+Install  33 Packages
+
+Total download size: 69 M
+Installed size: 184 M
+Downloading Packages:
+(1/33): python39-six-1.15.0-3.module+el8.4.0+98 104 kB/s |  41 kB     00:00    
+(2/33): python39-ply-3.11-10.module+el8.4.0+982 261 kB/s | 111 kB     00:00    
+(3/33): isl-0.16.1-6.el8.x86_64.rpm             1.6 MB/s | 841 kB     00:00    
+(4/33): python39-idna-2.10-3.module+el8.4.0+982 490 kB/s |  88 kB     00:00    
+(5/33): python39-pycparser-2.20-3.module+el8.4. 440 kB/s | 131 kB     00:00    
+(6/33): python39-cffi-1.14.3-2.module+el8.4.0+9 1.3 MB/s | 250 kB     00:00    
+(7/33): libmpc-1.1.0-9.1.el8.x86_64.rpm         146 kB/s |  61 kB     00:00    
+(8/33): python39-setuptools-50.3.2-4.module+el8 1.9 MB/s | 871 kB     00:00    
+(9/33): python39-cryptography-3.3.1-2.module+el 1.0 MB/s | 556 kB     00:00    
+(10/33): python39-setuptools-wheel-50.3.2-4.mod 1.6 MB/s | 497 kB     00:00    
+(11/33): python39-pip-wheel-20.2.4-7.module+el8 4.9 MB/s | 1.1 MB     00:00    
+(12/33): python39-3.9.16-1.module+el8.8.0+17625 159 kB/s |  33 kB     00:00    
+(13/33): python39-lxml-4.6.5-1.module+el8.6.0+1 4.2 MB/s | 1.3 MB     00:00    
+(14/33): python39-pip-20.2.4-7.module+el8.6.0+1 3.7 MB/s | 1.9 MB     00:00    
+(15/33): python39-devel-3.9.16-1.module+el8.8.0 1.3 MB/s | 233 kB     00:00    
+(16/33): python39-libs-3.9.16-1.module+el8.8.0+  18 MB/s | 8.2 MB     00:00    
+(17/33): libssh-devel-0.9.6-6.el8.x86_64.rpm    1.6 MB/s | 439 kB     00:00    
+(18/33): cpp-8.5.0-18.el8.x86_64.rpm             17 MB/s |  10 MB     00:00    
+(19/33): cmake-filesystem-3.20.2-5.el8.x86_64.r 175 kB/s |  45 kB     00:00    
+(20/33): gcc-8.5.0-18.el8.x86_64.rpm             21 MB/s |  23 MB     00:01    
+(21/33): pkgconf-1.4.2-1.el8.x86_64.rpm          87 kB/s |  38 kB     00:00    
+(22/33): pkgconf-pkg-config-1.4.2-1.el8.x86_64.  38 kB/s |  15 kB     00:00    
+(23/33): libpkgconf-1.4.2-1.el8.x86_64.rpm      152 kB/s |  35 kB     00:00    
+(24/33): pkgconf-m4-1.4.2-1.el8.noarch.rpm       77 kB/s |  17 kB     00:00    
+(25/33): libxslt-1.1.32-6.el8.x86_64.rpm        966 kB/s | 250 kB     00:00    
+(26/33): libxcrypt-devel-4.1.1-6.el8.x86_64.rpm 148 kB/s |  25 kB     00:00    
+(27/33): make-4.2.1-11.el8.x86_64.rpm           1.2 MB/s | 498 kB     00:00    
+(28/33): iputils-20180629-10.el8.x86_64.rpm     399 kB/s | 148 kB     00:00    
+(29/33): binutils-2.30-119.el8.x86_64.rpm        13 MB/s | 5.8 MB     00:00    
+(30/33): glibc-devel-2.28-225.el8.x86_64.rpm    465 kB/s |  83 kB     00:00    
+(31/33): libgomp-8.5.0-18.el8.x86_64.rpm        538 kB/s | 208 kB     00:00    
+(32/33): glibc-headers-2.28-225.el8.x86_64.rpm  1.0 MB/s | 488 kB     00:00    
+(33/33): kernel-headers-4.18.0-477.13.1.el8_8.x  13 MB/s |  11 MB     00:00    
+--------------------------------------------------------------------------------
+Total                                            15 MB/s |  69 MB     00:04     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libmpc-1.1.0-9.1.el8.x86_64                           1/33 
+  Installing       : cpp-8.5.0-18.el8.x86_64                               2/33 
+  Running scriptlet: cpp-8.5.0-18.el8.x86_64                               2/33 
+  Installing       : kernel-headers-4.18.0-477.13.1.el8_8.x86_64           3/33 
+  Running scriptlet: glibc-headers-2.28-225.el8.x86_64                     4/33 
+  Installing       : glibc-headers-2.28-225.el8.x86_64                     4/33 
+  Installing       : libgomp-8.5.0-18.el8.x86_64                           5/33 
+  Running scriptlet: libgomp-8.5.0-18.el8.x86_64                           5/33 
+  Installing       : binutils-2.30-119.el8.x86_64                          6/33 
+  Running scriptlet: binutils-2.30-119.el8.x86_64                          6/33 
+  Installing       : libxslt-1.1.32-6.el8.x86_64                           7/33 
+  Installing       : pkgconf-m4-1.4.2-1.el8.noarch                         8/33 
+  Installing       : libpkgconf-1.4.2-1.el8.x86_64                         9/33 
+  Installing       : pkgconf-1.4.2-1.el8.x86_64                           10/33 
+  Installing       : pkgconf-pkg-config-1.4.2-1.el8.x86_64                11/33 
+  Installing       : glibc-devel-2.28-225.el8.x86_64                      12/33 
+  Running scriptlet: glibc-devel-2.28-225.el8.x86_64                      12/33 
+  Installing       : libxcrypt-devel-4.1.1-6.el8.x86_64                   13/33 
+  Installing       : cmake-filesystem-3.20.2-5.el8.x86_64                 14/33 
+  Installing       : python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6   15/33 
+  Installing       : python39-setuptools-wheel-50.3.2-4.module+el8.5.0+   16/33 
+  Installing       : python39-libs-3.9.16-1.module+el8.8.0+17625+b531f1   17/33 
+  Installing       : python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8   18/33 
+  Running scriptlet: python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8   18/33 
+  Installing       : python39-setuptools-50.3.2-4.module+el8.5.0+12204+   19/33 
+  Running scriptlet: python39-setuptools-50.3.2-4.module+el8.5.0+12204+   19/33 
+  Installing       : python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48   20/33 
+  Running scriptlet: python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48   20/33 
+  Installing       : python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.   21/33 
+  Installing       : python39-pycparser-2.20-3.module+el8.4.0+9822+20bf   22/33 
+  Installing       : python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf124   23/33 
+  Installing       : python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249   24/33 
+  Installing       : python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.   25/33 
+  Installing       : isl-0.16.1-6.el8.x86_64                              26/33 
+  Running scriptlet: isl-0.16.1-6.el8.x86_64                              26/33 
+  Installing       : gcc-8.5.0-18.el8.x86_64                              27/33 
+  Running scriptlet: gcc-8.5.0-18.el8.x86_64                              27/33 
+  Installing       : python39-cryptography-3.3.1-2.module+el8.4.0+9822+   28/33 
+  Installing       : python39-devel-3.9.16-1.module+el8.8.0+17625+b531f   29/33 
+  Running scriptlet: python39-devel-3.9.16-1.module+el8.8.0+17625+b531f   29/33 
+  Installing       : python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87   30/33 
+  Installing       : libssh-devel-0.9.6-6.el8.x86_64                      31/33 
+  Installing       : iputils-20180629-10.el8.x86_64                       32/33 
+  Running scriptlet: iputils-20180629-10.el8.x86_64                       32/33 
+  Installing       : make-1:4.2.1-11.el8.x86_64                           33/33 
+  Running scriptlet: make-1:4.2.1-11.el8.x86_64                           33/33 
+  Verifying        : isl-0.16.1-6.el8.x86_64                               1/33 
+  Verifying        : python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.    2/33 
+  Verifying        : python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249    3/33 
+  Verifying        : python39-pycparser-2.20-3.module+el8.4.0+9822+20bf    4/33 
+  Verifying        : python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.    5/33 
+  Verifying        : python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf124    6/33 
+  Verifying        : libmpc-1.1.0-9.1.el8.x86_64                           7/33 
+  Verifying        : python39-cryptography-3.3.1-2.module+el8.4.0+9822+    8/33 
+  Verifying        : python39-setuptools-50.3.2-4.module+el8.5.0+12204+    9/33 
+  Verifying        : python39-setuptools-wheel-50.3.2-4.module+el8.5.0+   10/33 
+  Verifying        : python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6   11/33 
+  Verifying        : python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48   12/33 
+  Verifying        : python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87   13/33 
+  Verifying        : python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8   14/33 
+  Verifying        : python39-libs-3.9.16-1.module+el8.8.0+17625+b531f1   15/33 
+  Verifying        : python39-devel-3.9.16-1.module+el8.8.0+17625+b531f   16/33 
+  Verifying        : gcc-8.5.0-18.el8.x86_64                              17/33 
+  Verifying        : cpp-8.5.0-18.el8.x86_64                              18/33 
+  Verifying        : libssh-devel-0.9.6-6.el8.x86_64                      19/33 
+  Verifying        : cmake-filesystem-3.20.2-5.el8.x86_64                 20/33 
+  Verifying        : pkgconf-1.4.2-1.el8.x86_64                           21/33 
+  Verifying        : pkgconf-pkg-config-1.4.2-1.el8.x86_64                22/33 
+  Verifying        : libpkgconf-1.4.2-1.el8.x86_64                        23/33 
+  Verifying        : pkgconf-m4-1.4.2-1.el8.noarch                        24/33 
+  Verifying        : libxslt-1.1.32-6.el8.x86_64                          25/33 
+  Verifying        : libxcrypt-devel-4.1.1-6.el8.x86_64                   26/33 
+  Verifying        : make-1:4.2.1-11.el8.x86_64                           27/33 
+  Verifying        : iputils-20180629-10.el8.x86_64                       28/33 
+  Verifying        : binutils-2.30-119.el8.x86_64                         29/33 
+  Verifying        : glibc-headers-2.28-225.el8.x86_64                    30/33 
+  Verifying        : libgomp-8.5.0-18.el8.x86_64                          31/33 
+  Verifying        : glibc-devel-2.28-225.el8.x86_64                      32/33 
+  Verifying        : kernel-headers-4.18.0-477.13.1.el8_8.x86_64          33/33 
+Installed products updated.
+
+Installed:
+  binutils-2.30-119.el8.x86_64                                                  
+  cmake-filesystem-3.20.2-5.el8.x86_64                                          
+  cpp-8.5.0-18.el8.x86_64                                                       
+  gcc-8.5.0-18.el8.x86_64                                                       
+  glibc-devel-2.28-225.el8.x86_64                                               
+  glibc-headers-2.28-225.el8.x86_64                                             
+  iputils-20180629-10.el8.x86_64                                                
+  isl-0.16.1-6.el8.x86_64                                                       
+  kernel-headers-4.18.0-477.13.1.el8_8.x86_64                                   
+  libgomp-8.5.0-18.el8.x86_64                                                   
+  libmpc-1.1.0-9.1.el8.x86_64                                                   
+  libpkgconf-1.4.2-1.el8.x86_64                                                 
+  libssh-devel-0.9.6-6.el8.x86_64                                               
+  libxcrypt-devel-4.1.1-6.el8.x86_64                                            
+  libxslt-1.1.32-6.el8.x86_64                                                   
+  make-1:4.2.1-11.el8.x86_64                                                    
+  pkgconf-1.4.2-1.el8.x86_64                                                    
+  pkgconf-m4-1.4.2-1.el8.noarch                                                 
+  pkgconf-pkg-config-1.4.2-1.el8.x86_64                                         
+  python39-3.9.16-1.module+el8.8.0+17625+b531f198.x86_64                        
+  python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf1249.x86_64                    
+  python39-cryptography-3.3.1-2.module+el8.4.0+9822+20bf1249.x86_64             
+  python39-devel-3.9.16-1.module+el8.8.0+17625+b531f198.x86_64                  
+  python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.noarch                      
+  python39-libs-3.9.16-1.module+el8.8.0+17625+b531f198.x86_64                   
+  python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87c.x86_64                    
+  python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c488.noarch                    
+  python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6bb2c488.noarch              
+  python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.noarch                      
+  python39-pycparser-2.20-3.module+el8.4.0+9822+20bf1249.noarch                 
+  python39-setuptools-50.3.2-4.module+el8.5.0+12204+54860423.noarch             
+  python39-setuptools-wheel-50.3.2-4.module+el8.5.0+12204+54860423.noarch       
+  python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249.noarch                     
+
+Complete!
++ /usr/bin/python3.11 -m venv /tmp/venv --system-site-packages --without-pip
++ source /tmp/venv/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/tmp/venv
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ PATH=/tmp/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(venv) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(venv) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ '[' -f /tmp/src/upper-constraints.txt ']'
++ [[ -n '' ]]
++ install_wheels
++ '[' -f /tmp/src/build-requirements.txt ']'
++ '[' -f setup.py ']'
++ '[' -f /tmp/src/requirements.txt ']'
++ '[' '!' -f /output/requirements.txt ']'
++ /usr/bin/python3.11 -m pip install --cache-dir=/output/wheels -r /tmp/src/requirements.txt
+Collecting ansible_pylibssh>=0.2.0
+  Downloading ansible_pylibssh-1.1.0-cp311-cp311-manylinux_2_24_x86_64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 30.3 MB/s eta 0:00:00
+Collecting jxmlease
+  Downloading jxmlease-1.0.3-py2.py3-none-any.whl (37 kB)
+Collecting ncclient
+  Downloading ncclient-0.6.13.tar.gz (105 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 105.7/105.7 kB 22.3 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting netaddr
+  Downloading netaddr-0.8.0-py2.py3-none-any.whl (1.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 53.8 MB/s eta 0:00:00
+Collecting paramiko==2.8.1
+  Downloading paramiko-2.8.1-py2.py3-none-any.whl (206 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 206.6/206.6 kB 62.3 MB/s eta 0:00:00
+Collecting xmltodict
+  Downloading xmltodict-0.13.0-py2.py3-none-any.whl (10.0 kB)
+Collecting grpcio
+  Downloading grpcio-1.54.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 53.6 MB/s eta 0:00:00
+Collecting protobuf
+  Downloading protobuf-4.23.3-cp37-abi3-manylinux2014_x86_64.whl (304 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 304.5/304.5 kB 74.5 MB/s eta 0:00:00
+Collecting jsonschema
+  Downloading jsonschema-4.17.3-py3-none-any.whl (90 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.4/90.4 kB 38.1 MB/s eta 0:00:00
+Collecting textfsm
+  Downloading textfsm-1.1.3-py2.py3-none-any.whl (44 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.7/44.7 kB 21.4 MB/s eta 0:00:00
+Collecting ttp
+  Downloading ttp-0.9.4-py2.py3-none-any.whl (85 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 85.6/85.6 kB 20.3 MB/s eta 0:00:00
+Collecting scp
+  Downloading scp-0.14.5-py2.py3-none-any.whl (8.7 kB)
+Collecting address
+  Downloading address-0.1.1.tar.gz (110 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 110.8/110.8 kB 44.6 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting bcrypt>=3.1.3
+  Downloading bcrypt-4.0.1-cp36-abi3-manylinux_2_28_x86_64.whl (593 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 593.7/593.7 kB 36.9 MB/s eta 0:00:00
+Requirement already satisfied: cryptography>=2.5 in /usr/local/lib64/python3.11/site-packages (from paramiko==2.8.1->-r /tmp/src/requirements.txt (line 5)) (41.0.1)
+Collecting pynacl>=1.0.1
+  Downloading PyNaCl-1.5.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (856 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 856.7/856.7 kB 21.1 MB/s eta 0:00:00
+Requirement already satisfied: setuptools>0.6 in /usr/local/lib/python3.11/site-packages (from ncclient->-r /tmp/src/requirements.txt (line 3)) (65.5.1)
+Collecting lxml>=3.3.0
+  Downloading lxml-4.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (7.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.2/7.2 MB 44.0 MB/s eta 0:00:00
+Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from ncclient->-r /tmp/src/requirements.txt (line 3)) (1.16.0)
+Collecting attrs>=17.4.0
+  Downloading attrs-23.1.0-py3-none-any.whl (61 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.2/61.2 kB 17.4 MB/s eta 0:00:00
+Collecting pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0
+  Downloading pyrsistent-0.19.3-py3-none-any.whl (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.5/57.5 kB 25.0 MB/s eta 0:00:00
+Collecting future
+  Downloading future-0.18.3.tar.gz (840 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 840.9/840.9 kB 47.0 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Requirement already satisfied: cffi>=1.12 in /usr/local/lib64/python3.11/site-packages (from cryptography>=2.5->paramiko==2.8.1->-r /tmp/src/requirements.txt (line 5)) (1.15.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packages (from cffi>=1.12->cryptography>=2.5->paramiko==2.8.1->-r /tmp/src/requirements.txt (line 5)) (2.21)
+Installing collected packages: netaddr, jxmlease, address, xmltodict, ttp, pyrsistent, protobuf, lxml, grpcio, future, bcrypt, attrs, ansible_pylibssh, textfsm, pynacl, jsonschema, paramiko, scp, ncclient
+  DEPRECATION: address is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for address: started
+  Running setup.py install for address: finished with status 'done'
+  DEPRECATION: future is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for future: started
+  Running setup.py install for future: finished with status 'done'
+  DEPRECATION: ncclient is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for ncclient: started
+  Running setup.py install for ncclient: finished with status 'done'
+Successfully installed address-0.1.1 ansible_pylibssh-1.1.0 attrs-23.1.0 bcrypt-4.0.1 future-0.18.3 grpcio-1.54.2 jsonschema-4.17.3 jxmlease-1.0.3 lxml-4.9.2 ncclient-0.6.13 netaddr-0.8.0 paramiko-2.8.1 protobuf-4.23.3 pynacl-1.5.0 pyrsistent-0.19.3 scp-0.14.5 textfsm-1.1.3 ttp-0.9.4 xmltodict-0.13.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.1.2
+[notice] To update, run: python3.11 -m pip install --upgrade pip
++ cp /tmp/src/requirements.txt /output/requirements.txt
+++ wc -l
+++ ls -1 '/output/wheels/*whl'
++ '[' 0 -gt 0 ']'
++ '[' -z ']'
++ /usr/bin/dnf clean all
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+42 files removed
++ rm -rf /var/cache/dnf /var/cache/yum
++ rm -rf /var/lib/dnf/history.sqlite /var/lib/dnf/history.sqlite-shm /var/lib/dnf/history.sqlite-wal
++ rm -rf /var/log/dnf.librepo.log /var/log/dnf.log /var/log/dnf.rpm.log /var/log/hawkey.log
++ rm -rf /tmp/venv
+--> 55100138392
+--> 616eb90a2e4
+[4/4] STEP 12/22: COPY --from=builder /output/ /output/
+--> 09e4294cb3c
+[4/4] STEP 13/22: RUN /output/scripts/install-from-bindep && rm -rf /output/wheels
++ PKGMGR=/usr/bin/dnf
++ PKGMGR_OPTS=
++ PKGMGR_PRESERVE_CACHE=
++ PYCMD=/usr/bin/python3.11
++ PIPCMD='/usr/bin/python3.11 -m pip'
++ PIP_OPTS=
++ /usr/bin/python3.11 -m ensurepip
+Looking in links: /tmp/tmp8447n0k5
+Requirement already satisfied: setuptools in /usr/local/lib/python3.11/site-packages (65.5.1)
+Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (22.3.1)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
++ '[' -z /usr/bin/dnf ']'
++ '[' /usr/bin/dnf = /usr/bin/microdnf ']'
++ '[' -f /output/bindep/run.txt ']'
+++ cat /output/bindep/run.txt
++ PACKAGES='iputils
+python39-cffi
+python39-cryptography
+python39-lxml
+python39-pycparser
+python39-six'
++ '[' '!' -z 'iputils
+python39-cffi
+python39-cryptography
+python39-lxml
+python39-pycparser
+python39-six' ']'
++ /usr/bin/dnf install -y iputils python39-cffi python39-cryptography python39-lxml python39-pycparser python39-six
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+Red Hat Enterprise Linux 8 for x86_64 - AppStre 9.9 MB/s |  57 MB     00:05    
+Red Hat Enterprise Linux 8 for x86_64 - BaseOS   23 MB/s |  61 MB     00:02    
+Red Hat Universal Base Image 8 (RPMs) - BaseOS  3.4 MB/s | 839 kB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - AppStre  11 MB/s | 3.3 MB     00:00    
+Red Hat Universal Base Image 8 (RPMs) - CodeRea 524 kB/s | 106 kB     00:00    
+Dependencies resolved.
+===================================================================================================================
+ Package                     Arch    Version                                Repository                         Size
+===================================================================================================================
+Installing:
+ iputils                     x86_64  20180629-10.el8                        rhel-8-for-x86_64-baseos-rpms     148 k
+ python39-cffi               x86_64  1.14.3-2.module+el8.4.0+9822+20bf1249  rhel-8-for-x86_64-appstream-rpms  250 k
+ python39-cryptography       x86_64  3.3.1-2.module+el8.4.0+9822+20bf1249   rhel-8-for-x86_64-appstream-rpms  556 k
+ python39-lxml               x86_64  4.6.5-1.module+el8.6.0+13933+9cf0c87c  rhel-8-for-x86_64-appstream-rpms  1.3 M
+ python39-pycparser          noarch  2.20-3.module+el8.4.0+9822+20bf1249    rhel-8-for-x86_64-appstream-rpms  131 k
+ python39-six                noarch  1.15.0-3.module+el8.4.0+9822+20bf1249  rhel-8-for-x86_64-appstream-rpms   41 k
+Installing dependencies:
+ libxslt                     x86_64  1.1.32-6.el8                           rhel-8-for-x86_64-baseos-rpms     250 k
+ python39                    x86_64  3.9.16-1.module+el8.8.0+17625+b531f198 rhel-8-for-x86_64-appstream-rpms   33 k
+ python39-idna               noarch  2.10-3.module+el8.4.0+9822+20bf1249    rhel-8-for-x86_64-appstream-rpms   88 k
+ python39-libs               x86_64  3.9.16-1.module+el8.8.0+17625+b531f198 rhel-8-for-x86_64-appstream-rpms  8.2 M
+ python39-pip-wheel          noarch  20.2.4-7.module+el8.6.0+13003+6bb2c488 rhel-8-for-x86_64-appstream-rpms  1.1 M
+ python39-ply                noarch  3.11-10.module+el8.4.0+9822+20bf1249   rhel-8-for-x86_64-appstream-rpms  111 k
+ python39-setuptools-wheel   noarch  50.3.2-4.module+el8.5.0+12204+54860423 rhel-8-for-x86_64-appstream-rpms  497 k
+Installing weak dependencies:
+ python39-pip                noarch  20.2.4-7.module+el8.6.0+13003+6bb2c488 rhel-8-for-x86_64-appstream-rpms  1.9 M
+ python39-setuptools         noarch  50.3.2-4.module+el8.5.0+12204+54860423 rhel-8-for-x86_64-appstream-rpms  871 k
+Enabling module streams:
+ python39                            3.9                                                                           
+
+Transaction Summary
+===================================================================================================================
+Install  15 Packages
+
+Total download size: 15 M
+Installed size: 56 M
+Downloading Packages:
+(1/15): python39-six-1.15.0-3.module+el8.4.0+98  97 kB/s |  41 kB     00:00    
+(2/15): python39-pycparser-2.20-3.module+el8.4. 295 kB/s | 131 kB     00:00    
+(3/15): python39-ply-3.11-10.module+el8.4.0+982 245 kB/s | 111 kB     00:00    
+(4/15): python39-idna-2.10-3.module+el8.4.0+982 471 kB/s |  88 kB     00:00    
+(5/15): python39-cffi-1.14.3-2.module+el8.4.0+9 1.2 MB/s | 250 kB     00:00    
+(6/15): python39-cryptography-3.3.1-2.module+el 2.2 MB/s | 556 kB     00:00    
+(7/15): python39-setuptools-wheel-50.3.2-4.modu 2.3 MB/s | 497 kB     00:00    
+(8/15): python39-setuptools-50.3.2-4.module+el8 2.2 MB/s | 871 kB     00:00    
+(9/15): python39-pip-wheel-20.2.4-7.module+el8. 3.2 MB/s | 1.1 MB     00:00    
+(10/15): python39-3.9.16-1.module+el8.8.0+17625 235 kB/s |  33 kB     00:00    
+(11/15): python39-pip-20.2.4-7.module+el8.6.0+1 4.6 MB/s | 1.9 MB     00:00    
+(12/15): python39-lxml-4.6.5-1.module+el8.6.0+1 4.1 MB/s | 1.3 MB     00:00    
+(13/15): libxslt-1.1.32-6.el8.x86_64.rpm        1.1 MB/s | 250 kB     00:00    
+(14/15): iputils-20180629-10.el8.x86_64.rpm     615 kB/s | 148 kB     00:00    
+(15/15): python39-libs-3.9.16-1.module+el8.8.0+  11 MB/s | 8.2 MB     00:00    
+--------------------------------------------------------------------------------
+Total                                           7.7 MB/s |  15 MB     00:02     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : libxslt-1.1.32-6.el8.x86_64                           1/15 
+  Installing       : python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6    2/15 
+  Installing       : python39-setuptools-wheel-50.3.2-4.module+el8.5.0+    3/15 
+  Installing       : python39-libs-3.9.16-1.module+el8.8.0+17625+b531f1    4/15 
+  Installing       : python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8    5/15 
+  Running scriptlet: python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8    5/15 
+  Installing       : python39-setuptools-50.3.2-4.module+el8.5.0+12204+    6/15 
+  Running scriptlet: python39-setuptools-50.3.2-4.module+el8.5.0+12204+    6/15 
+  Installing       : python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48    7/15 
+  Running scriptlet: python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48    7/15 
+  Installing       : python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.    8/15 
+  Installing       : python39-pycparser-2.20-3.module+el8.4.0+9822+20bf    9/15 
+  Installing       : python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf124   10/15 
+  Installing       : python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249   11/15 
+  Installing       : python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.   12/15 
+  Installing       : python39-cryptography-3.3.1-2.module+el8.4.0+9822+   13/15 
+  Installing       : python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87   14/15 
+  Installing       : iputils-20180629-10.el8.x86_64                       15/15 
+  Running scriptlet: iputils-20180629-10.el8.x86_64                       15/15 
+  Verifying        : python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.    1/15 
+  Verifying        : python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249    2/15 
+  Verifying        : python39-pycparser-2.20-3.module+el8.4.0+9822+20bf    3/15 
+  Verifying        : python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.    4/15 
+  Verifying        : python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf124    5/15 
+  Verifying        : python39-cryptography-3.3.1-2.module+el8.4.0+9822+    6/15 
+  Verifying        : python39-setuptools-50.3.2-4.module+el8.5.0+12204+    7/15 
+  Verifying        : python39-setuptools-wheel-50.3.2-4.module+el8.5.0+    8/15 
+  Verifying        : python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6    9/15 
+  Verifying        : python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c48   10/15 
+  Verifying        : python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87   11/15 
+  Verifying        : python39-3.9.16-1.module+el8.8.0+17625+b531f198.x8   12/15 
+  Verifying        : python39-libs-3.9.16-1.module+el8.8.0+17625+b531f1   13/15 
+  Verifying        : libxslt-1.1.32-6.el8.x86_64                          14/15 
+  Verifying        : iputils-20180629-10.el8.x86_64                       15/15 
+Installed products updated.
+
+Installed:
+  iputils-20180629-10.el8.x86_64                                                
+  libxslt-1.1.32-6.el8.x86_64                                                   
+  python39-3.9.16-1.module+el8.8.0+17625+b531f198.x86_64                        
+  python39-cffi-1.14.3-2.module+el8.4.0+9822+20bf1249.x86_64                    
+  python39-cryptography-3.3.1-2.module+el8.4.0+9822+20bf1249.x86_64             
+  python39-idna-2.10-3.module+el8.4.0+9822+20bf1249.noarch                      
+  python39-libs-3.9.16-1.module+el8.8.0+17625+b531f198.x86_64                   
+  python39-lxml-4.6.5-1.module+el8.6.0+13933+9cf0c87c.x86_64                    
+  python39-pip-20.2.4-7.module+el8.6.0+13003+6bb2c488.noarch                    
+  python39-pip-wheel-20.2.4-7.module+el8.6.0+13003+6bb2c488.noarch              
+  python39-ply-3.11-10.module+el8.4.0+9822+20bf1249.noarch                      
+  python39-pycparser-2.20-3.module+el8.4.0+9822+20bf1249.noarch                 
+  python39-setuptools-50.3.2-4.module+el8.5.0+12204+54860423.noarch             
+  python39-setuptools-wheel-50.3.2-4.module+el8.5.0+12204+54860423.noarch       
+  python39-six-1.15.0-3.module+el8.4.0+9822+20bf1249.noarch                     
+
+Complete!
++ '[' -f /output/bindep/epel.txt ']'
++ '[' -f /output/upper-constraints.txt ']'
++ '[' -f /output/requirements.txt ']'
++ /usr/bin/python3.11 -m pip install --cache-dir=/output/wheels -r /output/requirements.txt
+Collecting ansible_pylibssh>=0.2.0
+  Using cached ansible_pylibssh-1.1.0-cp311-cp311-manylinux_2_24_x86_64.whl (2.3 MB)
+Collecting jxmlease
+  Using cached jxmlease-1.0.3-py2.py3-none-any.whl (37 kB)
+Collecting ncclient
+  Using cached ncclient-0.6.13.tar.gz (105 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting netaddr
+  Using cached netaddr-0.8.0-py2.py3-none-any.whl (1.9 MB)
+Collecting paramiko==2.8.1
+  Using cached paramiko-2.8.1-py2.py3-none-any.whl (206 kB)
+Collecting xmltodict
+  Using cached xmltodict-0.13.0-py2.py3-none-any.whl (10.0 kB)
+Collecting grpcio
+  Using cached grpcio-1.54.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (5.1 MB)
+Collecting protobuf
+  Using cached protobuf-4.23.3-cp37-abi3-manylinux2014_x86_64.whl (304 kB)
+Collecting jsonschema
+  Using cached jsonschema-4.17.3-py3-none-any.whl (90 kB)
+Collecting textfsm
+  Using cached textfsm-1.1.3-py2.py3-none-any.whl (44 kB)
+Collecting ttp
+  Using cached ttp-0.9.4-py2.py3-none-any.whl (85 kB)
+Collecting scp
+  Using cached scp-0.14.5-py2.py3-none-any.whl (8.7 kB)
+Collecting address
+  Using cached address-0.1.1.tar.gz (110 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting bcrypt>=3.1.3
+  Using cached bcrypt-4.0.1-cp36-abi3-manylinux_2_28_x86_64.whl (593 kB)
+Requirement already satisfied: cryptography>=2.5 in /usr/local/lib64/python3.11/site-packages (from paramiko==2.8.1->-r /output/requirements.txt (line 5)) (41.0.1)
+Collecting pynacl>=1.0.1
+  Using cached PyNaCl-1.5.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (856 kB)
+Requirement already satisfied: setuptools>0.6 in /usr/local/lib/python3.11/site-packages (from ncclient->-r /output/requirements.txt (line 3)) (65.5.1)
+Collecting lxml>=3.3.0
+  Using cached lxml-4.9.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (7.2 MB)
+Requirement already satisfied: six in /usr/local/lib/python3.11/site-packages (from ncclient->-r /output/requirements.txt (line 3)) (1.16.0)
+Collecting attrs>=17.4.0
+  Using cached attrs-23.1.0-py3-none-any.whl (61 kB)
+Collecting pyrsistent!=0.17.0,!=0.17.1,!=0.17.2,>=0.14.0
+  Using cached pyrsistent-0.19.3-py3-none-any.whl (57 kB)
+Collecting future
+  Using cached future-0.18.3.tar.gz (840 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Requirement already satisfied: cffi>=1.12 in /usr/local/lib64/python3.11/site-packages (from cryptography>=2.5->paramiko==2.8.1->-r /output/requirements.txt (line 5)) (1.15.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.11/site-packages (from cffi>=1.12->cryptography>=2.5->paramiko==2.8.1->-r /output/requirements.txt (line 5)) (2.21)
+Installing collected packages: netaddr, jxmlease, address, xmltodict, ttp, pyrsistent, protobuf, lxml, grpcio, future, bcrypt, attrs, ansible_pylibssh, textfsm, pynacl, jsonschema, paramiko, scp, ncclient
+  DEPRECATION: address is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for address: started
+  Running setup.py install for address: finished with status 'done'
+  DEPRECATION: future is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for future: started
+  Running setup.py install for future: finished with status 'done'
+  DEPRECATION: ncclient is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for ncclient: started
+  Running setup.py install for ncclient: finished with status 'done'
+Successfully installed address-0.1.1 ansible_pylibssh-1.1.0 attrs-23.1.0 bcrypt-4.0.1 future-0.18.3 grpcio-1.54.2 jsonschema-4.17.3 jxmlease-1.0.3 lxml-4.9.2 ncclient-0.6.13 netaddr-0.8.0 paramiko-2.8.1 protobuf-4.23.3 pynacl-1.5.0 pyrsistent-0.19.3 scp-0.14.5 textfsm-1.1.3 ttp-0.9.4 xmltodict-0.13.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.1.2
+[notice] To update, run: python3.11 -m pip install --upgrade pip
++ EXTRAS=
++ '[' -f /output/packages.txt ']'
+++ wc -l
+++ ls -1 '/output/wheels/*whl'
++ '[' 0 -gt 0 ']'
++ '[' '!' -z '' ']'
++ [[ '' != always ]]
++ /usr/bin/dnf clean all
+Updating Subscription Management repositories.
+Unable to read consumer identity
+Subscription Manager is operating in container mode.
+42 files removed
++ rm -rf /var/cache/dnf /var/cache/yum
++ rm -rf /var/lib/dnf/history.sqlite /var/lib/dnf/history.sqlite-shm /var/lib/dnf/history.sqlite-wal
++ rm -rf /var/log/dnf.librepo.log /var/log/dnf.log /var/log/dnf.rpm.log /var/log/hawkey.log
+--> c2c128137ff
+[4/4] STEP 14/22: RUN chmod ug+rw /etc/passwd
+--> b3dbc2ebc0c
+[4/4] STEP 15/22: RUN mkdir -p /runner && chgrp 0 /runner && chmod -R ug+rwx /runner
+--> 03917855f2f
+[4/4] STEP 16/22: WORKDIR /runner
+--> e536e47a8c9
+[4/4] STEP 17/22: RUN $PYCMD -m pip install --no-cache-dir 'dumb-init==1.2.5'
+Collecting dumb-init==1.2.5
+  Downloading dumb_init-1.2.5-py2.py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.1 kB)
+Installing collected packages: dumb-init
+Successfully installed dumb-init-1.2.5
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.1.2
+[notice] To update, run: python3.11 -m pip install --upgrade pip
+--> 57ba0b15e42
+[4/4] STEP 18/22: RUN rm -rf /output
+--> 73a133d63aa
+[4/4] STEP 19/22: LABEL ansible-execution-environment=true
+--> 450119dd846
+[4/4] STEP 20/22: USER 1000
+--> 60371c68fb8
+[4/4] STEP 21/22: ENTRYPOINT ["/opt/builder/bin/entrypoint", "dumb-init"]
+--> 1c8ba0f903b
+[4/4] STEP 22/22: CMD ["bash"]
+[4/4] COMMIT py311v3-2
+--> 766eca96a78
+Successfully tagged localhost/py311v3-2:latest
+766eca96a785ad93eeec2d21f64da80c0b6bd930412f2c2c6179891219b166ef
+
+Complete! The build context can be found at: /home/ansible/git/ansiblebuilder-demo/context

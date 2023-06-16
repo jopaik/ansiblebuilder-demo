@@ -12,7 +12,7 @@ ansible-navigator:
         KEY1: VALUE1
         KEY2: VALUE2
         KEY3: VALUE3
-    image: quay.io/jopaik/cisco-ee
+    image: localhost/cisco-ee
     pull:
       policy: never
   logging:

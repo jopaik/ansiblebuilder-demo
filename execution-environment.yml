@@ -16,7 +16,7 @@ dependencies:
     python_path: /usr/bin/python3.11  # (optional) path to the Python interpreter to use
 
   ansible_core:  # (optional) install ansible-core if the base image doesn't already contain it
-    package_pip: https://github.com/ansible/ansible/archive/refs/tags/v2.13.2.tar.gz   # install from a GH ref tarball
+    package_pip: https://github.com/ansible/ansible/archive/refs/tags/v2.14.6.tar.gz   # install from a GH ref tarball
 
   ansible_runner:  # (optional) install ansible-runner if the base image doesn't already contain it
     package_pip: ansible-runner==2.3.3   # install specific version from PyPI
