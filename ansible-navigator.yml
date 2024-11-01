@@ -1,19 +1,16 @@
 ---
 ansible-navigator:
+  ansible:
+    inventory:
+      entries:
+      - /home/student/lab_inventory/hosts
+
   execution-environment:
-    container-engine: podman
+    image: quay.io/acme_corp/network-ee:latest
     enabled: true
-    environment-variables:
-      pass:
-      - ONE
-      - TWO
-      - THREE
-      set:
-        KEY1: VALUE1
-        KEY2: VALUE2
-        KEY3: VALUE3
-    image: quay.io/jopaik/cisco-ee
+    container-engine: podman
     pull:
-      policy: never
-  logging:
-    level: critical
+      policy: missing
+    volume-mounts:
+    - src: "/etc/ansible/"
+      dest: "/etc/ansible/"
