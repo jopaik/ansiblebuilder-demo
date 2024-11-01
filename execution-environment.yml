@@ -9,6 +9,7 @@ dependencies:
   galaxy:
     collections:
     - arista.cvp
+    - arista.avd
   
   python:
   - address
