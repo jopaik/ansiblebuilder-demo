@@ -13,6 +13,8 @@ dependencies:
   
   python:
   - address
+
+  system: bindept.txt
   
 options:
   package_manager_path: /usr/bin/microdnf
