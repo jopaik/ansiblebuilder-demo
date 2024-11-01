@@ -3,14 +3,12 @@ version: 3
 
 images:
   base_image:
-    name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
+    name: quay.io/acme_corp/network-ee:latest
 
 dependencies:
   galaxy:
     collections:
-    - ansible.netcommon
-    - cisco.ios
-    - arista.eos
+    - arista.cvp
   
   python:
   - address
