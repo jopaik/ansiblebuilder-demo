@@ -9,12 +9,11 @@ dependencies:
   galaxy:
     collections:
     - arista.cvp
-    - ansible.utils
-    - arista.avd
+
   
   python:
   - address
-  - pyavd
+
 
 options:
   package_manager_path: /usr/bin/microdnf
