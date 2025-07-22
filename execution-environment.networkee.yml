@@ -1,0 +1,19 @@
+---
+version: 3
+
+images:
+  base_image:
+    name: quay.io/acme_corp/network-ee:latest
+
+dependencies:
+  galaxy:
+    collections:
+    - arista.cvp
+
+  
+  python:
+  - address
+
+
+options:
+  package_manager_path: /usr/bin/microdnf

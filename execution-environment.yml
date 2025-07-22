@@ -3,14 +3,18 @@ version: 3
 
 images:
   base_image:
-    name: quay.io/acme_corp/network-ee:latest
+    name: registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18.5
 
 dependencies:
   galaxy:
     collections:
-    - arista.cvp
+    - ansible.windows
+    - community.windows
+    - ansible.posix
+    - community.general
+    - redhat.rhel_system_roles
+    - redhat.rhel_idm
 
-  
   python:
   - address
 

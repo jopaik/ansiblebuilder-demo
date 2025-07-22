@@ -1,27 +1,21 @@
-ARG EE_BASE_IMAGE="registry.access.redhat.com/ubi8/ubi:latest"
-ARG PYCMD="/usr/bin/python3.11"
-ARG PYPKG="python311"
+ARG EE_BASE_IMAGE="registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18.5"
+ARG PYCMD="/usr/bin/python3"
 ARG PKGMGR_PRESERVE_CACHE=""
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=""
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS=""
-ARG ANSIBLE_INSTALL_REFS="https://github.com/ansible/ansible/archive/refs/tags/v2.14.6.tar.gz ansible-runner==2.3.3"
-ARG PKGMGR="/usr/bin/dnf"
+ARG PKGMGR="/usr/bin/microdnf"
 
 # Base build stage
 FROM $EE_BASE_IMAGE as base
 USER root
 ARG EE_BASE_IMAGE
 ARG PYCMD
-ARG PYPKG
 ARG PKGMGR_PRESERVE_CACHE
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-ARG ANSIBLE_INSTALL_REFS
 ARG PKGMGR
 
-RUN $PKGMGR install $PYPKG -y ; if [ -z $PKGMGR_PRESERVE_CACHE ]; then $PKGMGR clean all; fi
 RUN $PYCMD -m ensurepip
-RUN $PYCMD -m pip install --no-cache-dir $ANSIBLE_INSTALL_REFS
 COPY _build/scripts/ /output/scripts/
 COPY _build/scripts/entrypoint /opt/builder/bin/entrypoint
 
@@ -29,11 +23,9 @@ COPY _build/scripts/entrypoint /opt/builder/bin/entrypoint
 FROM base as galaxy
 ARG EE_BASE_IMAGE
 ARG PYCMD
-ARG PYPKG
 ARG PKGMGR_PRESERVE_CACHE
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-ARG ANSIBLE_INSTALL_REFS
 ARG PKGMGR
 
 RUN /output/scripts/check_galaxy
@@ -48,11 +40,9 @@ FROM base as builder
 WORKDIR /build
 ARG EE_BASE_IMAGE
 ARG PYCMD
-ARG PYPKG
 ARG PKGMGR_PRESERVE_CACHE
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-ARG ANSIBLE_INSTALL_REFS
 ARG PKGMGR
 
 RUN $PYCMD -m pip install --no-cache-dir bindep pyyaml requirements-parser
@@ -68,11 +58,9 @@ RUN /output/scripts/assemble
 FROM base as final
 ARG EE_BASE_IMAGE
 ARG PYCMD
-ARG PYPKG
 ARG PKGMGR_PRESERVE_CACHE
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS
-ARG ANSIBLE_INSTALL_REFS
 ARG PKGMGR
 
 RUN /output/scripts/check_ansible $PYCMD
